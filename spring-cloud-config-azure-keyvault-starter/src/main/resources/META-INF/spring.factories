@@ -1,0 +1,4 @@
+# Autoconfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.srempfer.cloud.config.keyvault.autoconfigure.KeyVaultAutoConfiguration,\
+org.srempfer.cloud.config.keyvault.autoconfigure.EnvironmentEncryptorAutoConfiguration

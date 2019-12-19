@@ -6,14 +6,23 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
+trigger:
+  branches:
+    include:
+      - master
+
 steps:
 - task: Maven@3
+  env:
+    AZURE_KEYVAULT_URI: $(keyvault-uri)
+    AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
+    AZURE_KEYVAULT_CLIENT_KEY: $(keyvault-client-key)
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
