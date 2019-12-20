@@ -1,0 +1,99 @@
+package org.srempfer.cloud.config.keyvault;
+
+import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
+import org.springframework.cloud.config.environment.Environment;
+import org.springframework.cloud.config.environment.PropertySource;
+import org.springframework.cloud.config.server.environment.EnvironmentRepository;
+import org.springframework.core.Ordered;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * An {@link EnvironmentRepository} that picks up data from a Azure KeyVault.
+ *
+ * @author Stefan Rempfer
+ */
+public class KeyVaultEnvironmentRepository implements EnvironmentRepository, Ordered {
+
+    private final KeyVaultOperation keyVaultOperation;
+    private int order;
+
+    public KeyVaultEnvironmentRepository ( KeyVaultOperation keyVaultOperation ) {
+        this.keyVaultOperation = keyVaultOperation;
+    }
+
+    @Override
+    public Environment findOne ( String application, String profile, String label ) {
+        String config = application;
+        if ( StringUtils.isEmpty ( label ) ) {
+            label = "master";
+        }
+        if ( StringUtils.isEmpty ( profile ) ) {
+            profile = "default";
+        }
+        if ( !profile.startsWith ( "default" ) ) {
+            profile = "default," + profile;
+        }
+        String[] profiles = StringUtils.commaDelimitedListToStringArray ( profile );
+        Environment environment = new Environment ( application, profiles, label, null, null );
+        if ( !config.startsWith ( "application" ) ) {
+            config = "application," + config;
+        }
+
+        List<String> applications = new ArrayList<String> ( new LinkedHashSet<> (
+            Arrays.asList ( StringUtils.commaDelimitedListToStringArray ( config ) ) ) );
+        List<String> envs = new ArrayList<String> (
+            new LinkedHashSet<> ( Arrays.asList ( profiles ) ) );
+        Collections.reverse ( applications );
+        Collections.reverse ( envs );
+
+        String[] keyVaultKeys = keyVaultOperation.list ();
+
+        for ( String app : applications ) {
+            for ( String env : envs ) {
+                String prefix = buildPrefix ( app, env, label );
+                Map<String, String> source = findProperties ( keyVaultKeys, prefix );
+                if ( !source.isEmpty () ) {
+                    environment.add ( new PropertySource ( "keyvault-" + app + "-" + env, source ) );
+                }
+            }
+        }
+        return environment;
+    }
+
+    private Map<String, String> findProperties ( String[] keyVaultKeys, String prefix ) {
+        Map<String, String> source = new HashMap<> ();
+        for ( String keyVaultKey : keyVaultKeys ) {
+            if ( keyVaultKey.startsWith ( prefix ) ) {
+                String propertyKey = keyVaultKey.substring ( prefix.length () );
+                if ( propertyKey.length () == 0 ) {
+                    continue;
+                }
+                propertyKey = StringUtils.replace ( propertyKey, "--", "." );
+                String propertyValue = keyVaultOperation.get ( keyVaultKey );
+                source.put ( propertyKey, propertyValue );
+            }
+        }
+        return source;
+    }
+
+    private String buildPrefix ( String application, String profile, String label ) {
+        return application + "---" + profile + "---" + label + "---";
+    }
+
+    @Override
+    public int getOrder () {
+        return this.order;
+    }
+
+    public void setOrder ( int order ) {
+        this.order = order;
+    }
+}
