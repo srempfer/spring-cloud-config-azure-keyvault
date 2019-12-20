@@ -4,20 +4,54 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.srempfer</groupId>
-    <artifactId>spring-cloud-config-azure-keyvault-sample</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>Spring Cloud Config Server Sample</name>
-    <description>Spring Cloud Config Server application to demonstrate the usage of the Azure KeyVault features</description>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.11.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
+
+    <groupId>io.github.srempfer</groupId>
+    <artifactId>spring-cloud-config-azure-keyvault-sample</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Spring Cloud Config Server Sample</name>
+    <description>Spring Cloud Config Server application to demonstrate the usage of the Azure KeyVault features</description>
+    <url>https://github.com/srempfer/spring-cloud-config-azure-keyvault</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Stefan Rempfer</name>
+            <email>rempfer@gmail.com</email>
+            <organization>srempfer</organization>
+            <organizationUrl>https://github.com/srempfer</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/srempfer/spring-cloud-config-azure-keyvault.git</connection>
+        <developerConnection>scm:git:https://github.com/srempfer/spring-cloud-config-azure-keyvault.git</developerConnection>
+        <url>https://github.com/srempfer/spring-cloud-config-azure-keyvault/tree/master</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,7 +68,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.srempfer</groupId>
+            <groupId>io.github.srempfer</groupId>
             <artifactId>spring-cloud-config-azure-keyvault-starter</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>

@@ -2,17 +2,48 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.srempfer</groupId>
+
+    <groupId>io.github.srempfer</groupId>
     <artifactId>spring-cloud-config-azure-keyvault</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.11.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
-    </parent>
+    <name>Spring Cloud Config Azure KeyVault</name>
+    <description>Azure KeyVault related Spring Cloud Config features</description>
+    <url>https://github.com/srempfer/spring-cloud-config-azure-keyvault</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Stefan Rempfer</name>
+            <email>rempfer@gmail.com</email>
+            <organization>srempfer</organization>
+            <organizationUrl>https://github.com/srempfer</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/srempfer/spring-cloud-config-azure-keyvault.git</connection>
+        <developerConnection>scm:git:https://github.com/srempfer/spring-cloud-config-azure-keyvault.git</developerConnection>
+        <url>https://github.com/srempfer/spring-cloud-config-azure-keyvault/tree/master</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 
     <modules>
         <module>spring-cloud-config-azure-keyvault-starter</module>
