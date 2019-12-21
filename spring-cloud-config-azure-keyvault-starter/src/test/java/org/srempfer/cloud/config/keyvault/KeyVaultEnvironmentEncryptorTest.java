@@ -1,31 +1,38 @@
 package org.srempfer.cloud.config.keyvault;
 
 import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.srempfer.cloud.config.keyvault.autoconfigure.KeyVaultAutoConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-@RunWith ( SpringRunner.class )
-@SpringBootTest ( classes = KeyVaultAutoConfiguration.class )
-public class KeyVaultEnvironmentEncryptorIntegrationTest {
+public class KeyVaultEnvironmentEncryptorTest {
 
-    @Autowired
-    private KeyVaultOperation keyVaultOperation;
+    private Map<String, String> data = new HashMap<> ();
+    private KeyVaultEnvironmentEncryptor cut;
+
+    @Before
+    public void init () {
+        KeyVaultOperation keyVaultOperation = mock ( KeyVaultOperation.class );
+        when ( keyVaultOperation.list () ).thenAnswer (
+            invocation -> data.keySet ().toArray ( new String[ data.size () ] ) );
+        when ( keyVaultOperation.get ( anyString () ) ).thenAnswer (
+            invocation -> data.get ( invocation.getArgument ( 0 ) ) );
+        cut = new KeyVaultEnvironmentEncryptor ( keyVaultOperation );
+    }
 
     @Test
     public void verifyDecrypt () {
-        KeyVaultEnvironmentEncryptor cut = new KeyVaultEnvironmentEncryptor ( keyVaultOperation );
+        data.put ( "test-key-to-decrypt", "decrypted-value" );
 
         Environment environmentToDecrypt = new Environment ( "testApp", "testProfile1", "testProfile2" );
 

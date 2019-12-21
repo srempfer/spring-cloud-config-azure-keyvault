@@ -39,5 +39,16 @@ steps:
     jdkVersionOption: '1.11'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: |
+      **/surefire-reports/TEST-*.xml
+      **/failsafe-reports/TEST-*.xml
     goals: 'clean deploy'
+
+# https://github.com/MicrosoftDocs/vsts-docs/issues/2914#issuecomment-560448579
+- task: PublishTestResults@2
+  displayName: Publish Test Results
+  inputs:
+    testResultsFiles: |
+      **/surefire-reports/TEST-*.xml
+      **/failsafe-reports/TEST-*.xml
+    failTaskOnFailedTests: true
