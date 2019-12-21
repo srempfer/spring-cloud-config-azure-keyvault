@@ -6,10 +6,12 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
-trigger:
-  branches:
-    include:
-      - master
+trigger: none
+pr: none
+
+variables:
+  - group: keyvault4testing
+  - group: ossrh
 
 steps:
 - task: DownloadSecureFile@1
@@ -27,6 +29,8 @@ steps:
     AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
     AZURE_KEYVAULT_CLIENT_KEY: $(keyvault-client-key)
     GPG_PASSPHRASE: $(gpg-passphrase)
+    OSSRH_USER_TOKEN: $(ossrh-user-token)
+    OSSRH_PWD_TOKEN: $(ossrh-pwd-token)
   inputs:
     mavenPomFile: 'pom.xml'
     options: '-s settings-ci.xml'
@@ -36,4 +40,4 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'verify'
+    goals: 'clean deploy'

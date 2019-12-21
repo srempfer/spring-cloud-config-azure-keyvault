@@ -1,0 +1,43 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+trigger:
+  branches:
+    include:
+      - master
+
+variables:
+- group: keyvault4testing
+- group: ossrh
+
+steps:
+- task: DownloadSecureFile@1
+  name: signingPrivatekey
+  inputs:
+    secureFile: 'signing-privatekey.asc'
+
+- task: CmdLine@2
+  inputs:
+    script: 'gpg --import $(signingPrivatekey.secureFilePath)'
+
+- task: Maven@3
+  env:
+    AZURE_KEYVAULT_URI: $(keyvault-uri)
+    AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
+    AZURE_KEYVAULT_CLIENT_KEY: $(keyvault-client-key)
+    GPG_PASSPHRASE: $(gpg-passphrase)
+  inputs:
+    mavenPomFile: 'pom.xml'
+    options: '-s settings-ci.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'clean verify'
