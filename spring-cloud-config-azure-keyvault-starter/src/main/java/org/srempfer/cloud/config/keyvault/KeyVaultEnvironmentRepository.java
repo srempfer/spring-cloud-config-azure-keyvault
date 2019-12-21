@@ -6,6 +6,7 @@ import org.springframework.cloud.config.environment.PropertySource;
 import org.springframework.cloud.config.server.environment.EnvironmentRepository;
 import org.springframework.core.Ordered;
 import org.springframework.util.StringUtils;
+import org.srempfer.cloud.config.keyvault.autoconfigure.KeyVaultEnvironmentProperties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +26,9 @@ public class KeyVaultEnvironmentRepository implements EnvironmentRepository, Ord
     private final KeyVaultOperation keyVaultOperation;
     private int order;
 
-    public KeyVaultEnvironmentRepository ( KeyVaultOperation keyVaultOperation ) {
+    public KeyVaultEnvironmentRepository ( KeyVaultOperation keyVaultOperation, KeyVaultEnvironmentProperties properties ) {
         this.keyVaultOperation = keyVaultOperation;
+        this.order = properties.getOrder ();
     }
 
     @Override

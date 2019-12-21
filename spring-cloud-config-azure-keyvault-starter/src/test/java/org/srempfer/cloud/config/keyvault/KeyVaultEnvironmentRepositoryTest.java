@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
+import org.srempfer.cloud.config.keyvault.autoconfigure.KeyVaultEnvironmentProperties;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +24,13 @@ public class KeyVaultEnvironmentRepositoryTest {
 
     @Before
     public void init () {
+        KeyVaultEnvironmentProperties properties = new KeyVaultEnvironmentProperties ();
         KeyVaultOperation keyVaultOperation = mock ( KeyVaultOperation.class );
         when ( keyVaultOperation.list () ).thenAnswer (
             invocation -> data.keySet ().toArray ( new String[ data.size () ] ) );
         when ( keyVaultOperation.get ( anyString () ) ).thenAnswer (
             invocation -> data.get ( invocation.getArgument ( 0 ) ) );
-        cut = new KeyVaultEnvironmentRepository ( keyVaultOperation );
+        cut = new KeyVaultEnvironmentRepository ( keyVaultOperation, properties );
     }
 
     @Test
