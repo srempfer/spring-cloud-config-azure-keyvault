@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
  *
  * @author Stefan Rempfer
  * @see
- * <a href="https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-starters/azure-keyvault-secrets-spring-boot-starter/README.md#custom-settings"/>
+ * <a href="https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-starters/azure-keyvault-secrets-spring-boot-starter/README.md#custom-settings">Documentation of Azure Keyvault Secrets Spring Boot Starter</a>
  */
 @Validated
 @ConfigurationProperties ( prefix = "azure.keyvault" )
@@ -37,7 +37,7 @@ public class KeyVaultProperties {
      * Client id to access the Azure KeyVault.
      *
      * @see
-     * <a href="https://github.com/microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample#setup-azure-key-vault"/>
+     * <a href="https://github.com/microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample#setup-azure-key-vault">Documentation of Azure Keyvault Secrets Spring Boot Sample</a>
      */
     @NotBlank
     private String clientId;
@@ -47,7 +47,7 @@ public class KeyVaultProperties {
      * Client key to access the Azure KeyVault.
      *
      * @see
-     * <a href="https://github.com/microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample#setup-azure-key-vault"/>
+     * <a href="https://github.com/microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample#setup-azure-key-vault">Documentation of Azure Keyvault Secrets Spring Boot Sample</a>
      */
     @NotBlank
     private String clientKey;
@@ -61,7 +61,7 @@ public class KeyVaultProperties {
      * Flag if telemetry of usage is sent to Microsoft.
      *
      * @see
-     * <a href="https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-starters/azure-keyvault-secrets-spring-boot-starter/README.md#allow-telemetry"/>
+     * <a href="https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-starters/azure-keyvault-secrets-spring-boot-starter/README.md#allow-telemetry">Documentation of Azure Keyvault Secrets Spring Boot Starter</a>
      */
     private Boolean allowTelemetry = Boolean.TRUE;
 
