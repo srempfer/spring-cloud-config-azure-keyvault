@@ -1,7 +1,6 @@
 package org.srempfer.cloud.config.keyvault.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.config.server.environment.EnvironmentRepositoryFactory;
 import org.springframework.cloud.config.server.support.EnvironmentRepositoryProperties;
 import org.springframework.core.Ordered;
 import org.srempfer.cloud.config.keyvault.KeyVaultEnvironmentRepository;

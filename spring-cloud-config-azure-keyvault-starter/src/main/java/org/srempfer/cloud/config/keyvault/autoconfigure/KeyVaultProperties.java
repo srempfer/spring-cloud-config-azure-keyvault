@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
  * <a href="https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-starters/azure-keyvault-secrets-spring-boot-starter/README.md#custom-settings">Documentation of Azure Keyvault Secrets Spring Boot Starter</a>
  */
 @Validated
-@ConfigurationProperties ( prefix = "azure.keyvault" )
+@ConfigurationProperties ( "spring.cloud.config.server.azure.keyvault" )
 public class KeyVaultProperties {
 
     /**

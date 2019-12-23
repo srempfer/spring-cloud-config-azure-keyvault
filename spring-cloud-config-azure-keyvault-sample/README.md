@@ -13,9 +13,9 @@ how to setup a KeyVault.
 
 Open `application.properties` file and add below properties to specify your Azure KeyVault url, Azure service principal client id and client key.
 ```
-azure.keyvault.uri=put-your-azure-keyvault-url-here
-azure.keyvault.client-id=put-your-azure-client-id-here
-azure.keyvault.client-key=put-your-azure-client-key-here
+spring.cloud.config.server.azure.keyvault.uri=put-your-azure-keyvault-url-here
+spring.cloud.config.server.azure.keyvault.client-id=put-your-azure-client-id-here
+spring.cloud.config.server.azure.keyvault.client-key=put-your-azure-client-key-here
 ```
 
 ## Testing

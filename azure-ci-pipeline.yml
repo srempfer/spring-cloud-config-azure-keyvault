@@ -27,9 +27,9 @@ steps:
 
 - task: Maven@3
   env:
-    AZURE_KEYVAULT_URI: $(keyvault-uri)
-    AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
-    AZURE_KEYVAULT_CLIENT_KEY: $(keyvault-client-key)
+    SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_URI: $(keyvault-uri)
+    SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
+    SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_KEY: $(keyvault-client-key)
     GPG_PASSPHRASE: $(gpg-passphrase)
   inputs:
     mavenPomFile: 'pom.xml'

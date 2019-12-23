@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author Stefan Rempfer
  */
-@ConditionalOnProperty ( prefix = "azure.keyvault", name = "enabled", matchIfMissing = true )
+@ConditionalOnProperty ( prefix = "spring.cloud.config.server.azure.keyvault", name = "uri" )
 @EnableConfigurationProperties ( KeyVaultProperties.class )
 @Configuration
 public class KeyVaultAutoConfiguration {
