@@ -1,5 +1,5 @@
 [![Build Status](https://dev.azure.com/srempfer-github/spring-cloud-config-azure-keyvault/_apis/build/status/ci?branchName=master)](https://dev.azure.com/srempfer-github/spring-cloud-config-azure-keyvault/_build/latest?definitionId=4&branchName=master)
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=io.github.srempfer%3Aspring-cloud-config-azure-keyvault&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.github.srempfer%3Aspring-cloud-config-azure-keyvault)
 # Spring Cloud Config Azure KeyVault Starter
 
 The Starter brings you the ability to use the *encrypted values feature* in your remote property sources. The values securely stored as secrets in Azure KeyVault.  
