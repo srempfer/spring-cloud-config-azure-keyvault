@@ -25,6 +25,12 @@ steps:
   inputs:
     script: 'gpg --import $(signingPrivatekey.secureFilePath)'
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud srempfer-github'
+    organization: 'srempfer'
+    scannerMode: 'Other'
+
 - task: Maven@3
   env:
     SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_URI: $(keyvault-uri)
@@ -42,7 +48,8 @@ steps:
     testResultsFiles: |
       **/surefire-reports/TEST-*.xml
       **/failsafe-reports/TEST-*.xml
-    goals: 'clean verify'
+    sonarQubeRunAnalysis: true
+    goals: 'clean package'
 
 # https://github.com/MicrosoftDocs/vsts-docs/issues/2914#issuecomment-560448579
 - task: PublishTestResults@2
