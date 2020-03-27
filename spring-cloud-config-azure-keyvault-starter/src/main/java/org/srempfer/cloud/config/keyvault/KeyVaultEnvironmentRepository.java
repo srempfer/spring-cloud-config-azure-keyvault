@@ -49,9 +49,9 @@ public class KeyVaultEnvironmentRepository implements EnvironmentRepository, Ord
             config = "application," + config;
         }
 
-        List<String> applications = new ArrayList<String> ( new LinkedHashSet<> (
+        List<String> applications = new ArrayList<> ( new LinkedHashSet<> (
             Arrays.asList ( StringUtils.commaDelimitedListToStringArray ( config ) ) ) );
-        List<String> envs = new ArrayList<String> (
+        List<String> envs = new ArrayList<> (
             new LinkedHashSet<> ( Arrays.asList ( profiles ) ) );
         Collections.reverse ( applications );
         Collections.reverse ( envs );
