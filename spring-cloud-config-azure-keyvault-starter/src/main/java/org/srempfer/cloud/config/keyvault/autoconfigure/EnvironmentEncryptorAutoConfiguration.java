@@ -4,7 +4,6 @@ import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.config.server.config.ConfigServerMvcConfiguration;
 import org.springframework.cloud.config.server.config.EncryptionAutoConfiguration;
 import org.springframework.cloud.config.server.config.EnvironmentRepositoryConfiguration;
