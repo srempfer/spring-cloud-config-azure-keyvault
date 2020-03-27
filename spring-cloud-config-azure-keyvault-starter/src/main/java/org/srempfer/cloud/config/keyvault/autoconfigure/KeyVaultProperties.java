@@ -53,6 +53,15 @@ public class KeyVaultProperties {
     private String clientKey;
 
     /**
+     * Tenant Id to access the Azure KeyVault.
+     *
+     * @see
+     * <a href="https://github.com/microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample#setup-azure-key-vault">Documentation of Azure Keyvault Secrets Spring Boot Sample</a>
+     */
+    @NotBlank
+    private String tenantId;
+
+    /**
      * Interval in milli seconds how long the retrieved secrets are cached before lookup in Azure KeyVault again.
      */
     private Long refreshInterval = Constants.DEFAULT_REFRESH_INTERVAL_MS;
@@ -103,6 +112,14 @@ public class KeyVaultProperties {
 
     public void setClientKey ( String clientKey ) {
         this.clientKey = clientKey;
+    }
+
+    public String getTenantId () {
+        return tenantId;
+    }
+
+    public void setTenantId ( String tenantId ) {
+        this.tenantId = tenantId;
     }
 
     public Long getRefreshInterval () {
