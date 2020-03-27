@@ -1,19 +1,17 @@
 package org.srempfer.cloud.config.keyvault.autoconfigure;
 
-import com.microsoft.azure.AzureResponseBuilder;
-import com.microsoft.azure.keyvault.KeyVaultClient;
-import com.microsoft.azure.keyvault.spring.AzureKeyVaultCredential;
-import com.microsoft.azure.keyvault.spring.Constants;
+import com.azure.core.credential.TokenCredential;
+import com.azure.identity.ClientSecretCredentialBuilder;
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
 import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
-import com.microsoft.azure.serializer.AzureJacksonAdapter;
-import com.microsoft.azure.spring.support.UserAgent;
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Collections;
 
 /**
  * Auto-Configuration for Azure KeyVault access.
@@ -27,30 +25,26 @@ public class KeyVaultAutoConfiguration {
 
     @ConditionalOnMissingBean
     @Bean
-    public ServiceClientCredentials serviceClientCredentials ( KeyVaultProperties properties ) {
-        return new AzureKeyVaultCredential ( properties.getClientId (), properties.getClientKey (), properties.getTokenAcquireTimeout () );
-    }
-
-    @ConditionalOnMissingBean
-    @Bean
-    public RestClient restClient ( KeyVaultProperties properties, ServiceClientCredentials credentials ) {
-        return new RestClient.Builder ().withBaseUrl ( properties.getUri () )
-            .withCredentials ( credentials )
-            .withSerializerAdapter ( new AzureJacksonAdapter () )
-            .withResponseBuilderFactory ( new AzureResponseBuilder.Factory () )
-            .withUserAgent ( UserAgent.getUserAgent ( Constants.AZURE_KEYVAULT_USER_AGENT, properties.getAllowTelemetry () ) )
+    public TokenCredential tokenCredential ( KeyVaultProperties properties ) {
+        return new ClientSecretCredentialBuilder ()
+            .clientId ( properties.getClientId () )
+            .clientSecret ( properties.getClientKey () )
+            .tenantId ( properties.getTenantId () )
             .build ();
     }
 
     @ConditionalOnMissingBean
     @Bean
-    public KeyVaultClient keyVaultClient ( RestClient restClient ) {
-        return new KeyVaultClient ( restClient );
+    public SecretClient keyVaultClient ( KeyVaultProperties properties, TokenCredential tokenCredential ) {
+        return new SecretClientBuilder ()
+            .vaultUrl ( properties.getUri () )
+            .credential ( tokenCredential )
+            .buildClient ();
     }
 
     @ConditionalOnMissingBean
     @Bean
-    public KeyVaultOperation keyVaultOperation ( KeyVaultProperties properties, KeyVaultClient client ) {
-        return new KeyVaultOperation ( client, properties.getUri (), properties.getRefreshInterval (), "" );
+    public KeyVaultOperation keyVaultOperation ( KeyVaultProperties properties, SecretClient client ) {
+        return new KeyVaultOperation ( client, properties.getUri (), properties.getRefreshInterval (), Collections.emptyList () );
     }
 }
