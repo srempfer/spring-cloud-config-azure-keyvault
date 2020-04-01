@@ -66,7 +66,10 @@ public class ConfigServerCompositeIntegrationTest {
         propertySource = propertySources.get ( 1 );
         assertThat ( propertySource.getName () ).isEqualTo ( "classpath:/config-data/application.properties" );
         source = (Map<Object, Object>) propertySource.getSource ();
-        assertThat ( source ).containsOnly ( entry ( "client.test.key", "test-value" ), entry ( "client.test.encrypted", "decrypted-value" ) );
+        assertThat ( source ).containsOnly (
+            entry ( "client.test.key", "test-value" ),
+            entry ( "client.test.encrypted", "decrypted-value" ),
+            entry ( "missing.client.test.encrypted-missing", "<n/a>" ) );
     }
 
     @Configuration
