@@ -16,6 +16,7 @@ Open `application.properties` file and add below properties to specify your Azur
 spring.cloud.config.server.azure.keyvault.uri=put-your-azure-keyvault-url-here
 spring.cloud.config.server.azure.keyvault.client-id=put-your-azure-client-id-here
 spring.cloud.config.server.azure.keyvault.client-key=put-your-azure-client-key-here
+spring.cloud.config.server.azure.keyvault.tenant-id=put-your-azure-tenant-id-here
 ```
 
 ## Testing
