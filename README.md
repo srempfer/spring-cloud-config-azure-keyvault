@@ -19,7 +19,7 @@ The starter is published on Maven Central. If you're using Maven add the followi
 <dependency>
     <groupId>io.github.srempfer</groupId>
     <artifactId>spring-cloud-config-azure-keyvault-starter</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -29,6 +29,7 @@ To get it working you have to specify your Azure KeyVault url, Azure service pri
 spring.cloud.config.server.azure.keyvault.uri=put-your-azure-keyvault-url-here
 spring.cloud.config.server.azure.keyvault.client-id=put-your-azure-client-id-here
 spring.cloud.config.server.azure.keyvault.client-key=put-your-azure-client-key-here
+spring.cloud.config.server.azure.keyvault.tenant-id=put-your-azure-tenant-id-here
 ```
 
 For the interaction with Azure KeyVault the [Azure Key Vault Secrets Spring Boot Starter](https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-starters/azure-keyvault-secrets-spring-boot-starter) 
