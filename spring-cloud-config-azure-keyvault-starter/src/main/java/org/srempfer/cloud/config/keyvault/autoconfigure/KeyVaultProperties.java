@@ -39,7 +39,6 @@ public class KeyVaultProperties {
      * @see
      * <a href="https://github.com/microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample#setup-azure-key-vault">Documentation of Azure Keyvault Secrets Spring Boot Sample</a>
      */
-    @NotBlank
     private String clientId;
 
 
@@ -49,7 +48,6 @@ public class KeyVaultProperties {
      * @see
      * <a href="https://github.com/microsoft/azure-spring-boot/tree/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample#setup-azure-key-vault">Documentation of Azure Keyvault Secrets Spring Boot Sample</a>
      */
-    @NotBlank
     private String clientKey;
 
     /**
