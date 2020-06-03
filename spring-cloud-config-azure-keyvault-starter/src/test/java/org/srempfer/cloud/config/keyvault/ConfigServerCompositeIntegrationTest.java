@@ -1,6 +1,5 @@
 package org.srempfer.cloud.config.keyvault;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -34,7 +33,6 @@ import static org.assertj.core.api.Assertions.entry;
         "spring.cloud.config.server.composite.[0].searchLocations=classpath:/config-data/,classpath:/config-data/{application}/",
         "spring.cloud.config.server.composite.[1].type=keyvault"
     } )
-@Ignore ( "Ignored because of issue #6" )
 public class ConfigServerCompositeIntegrationTest {
 
     @LocalServerPort
@@ -59,17 +57,17 @@ public class ConfigServerCompositeIntegrationTest {
         assertThat ( propertySources ).hasSize ( 2 );
 
         PropertySource propertySource = propertySources.get ( 0 );
-        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-application-default" );
-        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
-        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
-
-        propertySource = propertySources.get ( 1 );
         assertThat ( propertySource.getName () ).isEqualTo ( "classpath:/config-data/application.properties" );
-        source = (Map<Object, Object>) propertySource.getSource ();
+        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
         assertThat ( source ).containsOnly (
             entry ( "client.test.key", "test-value" ),
             entry ( "client.test.encrypted", "decrypted-value" ),
             entry ( "missing.client.test.encrypted-missing", "<n/a>" ) );
+
+        propertySource = propertySources.get ( 1 );
+        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-application-default" );
+        source = (Map<Object, Object>) propertySource.getSource ();
+        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
     }
 
     @Configuration

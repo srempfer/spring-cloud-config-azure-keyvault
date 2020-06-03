@@ -4,9 +4,7 @@ import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.cloud.config.server.config.ConfigServerMvcConfiguration;
-import org.springframework.cloud.config.server.config.EncryptionAutoConfiguration;
-import org.springframework.cloud.config.server.config.EnvironmentRepositoryConfiguration;
+import org.springframework.cloud.config.server.config.ConfigServerAutoConfiguration;
 import org.springframework.cloud.config.server.encryption.EnvironmentEncryptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +19,9 @@ import java.util.List;
  *
  * @author Stefan Rempfer
  */
-@AutoConfigureBefore ( { EncryptionAutoConfiguration.class, ConfigServerMvcConfiguration.class, EnvironmentRepositoryConfiguration.class } )
+@AutoConfigureBefore ( { ConfigServerAutoConfiguration.class } )
 @AutoConfigureAfter ( KeyVaultAutoConfiguration.class )
-@Configuration
+@Configuration ( proxyBeanMethods = false )
 public class EnvironmentEncryptorAutoConfiguration {
 
     @Primary
