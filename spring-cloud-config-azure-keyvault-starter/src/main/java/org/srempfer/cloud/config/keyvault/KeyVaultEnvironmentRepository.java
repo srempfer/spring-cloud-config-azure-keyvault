@@ -56,7 +56,7 @@ public class KeyVaultEnvironmentRepository implements EnvironmentRepository, Ord
         Collections.reverse ( applications );
         Collections.reverse ( envs );
 
-        String[] keyVaultKeys = keyVaultOperation.list ();
+        String[] keyVaultKeys = keyVaultOperation.getPropertyNames ();
 
         for ( String app : applications ) {
             for ( String env : envs ) {
