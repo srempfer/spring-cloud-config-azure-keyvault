@@ -27,7 +27,7 @@ public class KeyVaultEnvironmentEncryptorTest {
 
     @Test
     public void verifyDecrypt () {
-        when ( keyVaultOperation.list () ).thenReturn ( new String[]{ "test-key-to-decrypt" } );
+        when ( keyVaultOperation.getPropertyNames () ).thenReturn ( new String[]{ "test-key-to-decrypt" } );
         when ( keyVaultOperation.get ( "test-key-to-decrypt" ) ).thenReturn ( "decrypted-value" );
         when ( keyVaultOperation.get ( "test-key-to-decrypt-missing" ) ).thenReturn ( null );
         when ( keyVaultOperation.get ( "test-key-to-decrypt-exception" ) ).thenThrow ( new RuntimeException ( "Unknown error" ) );
