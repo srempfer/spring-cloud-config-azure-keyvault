@@ -25,7 +25,7 @@ import java.util.Collections;
  */
 @ConditionalOnProperty ( prefix = "spring.cloud.config.server.azure.keyvault", name = "uri" )
 @EnableConfigurationProperties ( KeyVaultProperties.class )
-@Configuration
+@Configuration ( proxyBeanMethods = false )
 public class KeyVaultAutoConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger ( KeyVaultAutoConfiguration.class );
