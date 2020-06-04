@@ -1,0 +1,119 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+trigger: none
+pr: none
+
+variables:
+  - group: keyvault4testing
+  - group: ossrh
+
+steps:
+
+- task: DownloadSecureFile@1
+  name: signingPrivatekey
+  inputs:
+    secureFile: 'signing-privatekey.asc'
+
+- task: CmdLine@2
+  inputs:
+    script: 'gpg --import $(signingPrivatekey.secureFilePath)'
+
+- task: Maven@3
+  env:
+    GPG_PASSPHRASE: $(gpg-passphrase)
+  inputs:
+    mavenPomFile: 'pom.xml'
+    options: '-s settings-ci.xml -DskipTests'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    sonarQubeRunAnalysis: false
+    goals: 'clean install'
+
+- task: Maven@3
+  displayName: Build Image
+  inputs:
+    mavenPomFile: 'spring-cloud-config-azure-keyvault-sample/pom.xml'
+    options: -Dspring-boot.build-image.imageName=srempfer/spring-cloud-config-azure-keyvault-sample:latest
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+    sonarQubeRunAnalysis: false
+    goals: 'spring-boot:build-image'
+
+- task: Docker@2
+  displayName: Login to DockerHub
+  inputs:
+    containerRegistry: 'Docker Hub srempfer'
+    command: login
+
+- task: Docker@2
+  displayName: Push image to DockerHub
+  inputs:
+    containerRegistry: 'Docker Hub srempfer'
+    command: 'push'
+    repository: 'srempfer/spring-cloud-config-azure-keyvault-sample'
+    tags: |
+      latest
+
+- task: Docker@2
+  displayName: Logout of DockerHub
+  inputs:
+    containerRegistry: 'Docker Hub srempfer'
+    command: logout
+
+- task: AzureCLI@2
+  displayName: Test sample
+  inputs:
+    azureSubscription: 'My Subscription'
+    scriptType: 'bash'
+    failOnStandardError: true
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      rgName=spring-cloud-config-azure-keyvault
+      aciName=spring-cloud-config-azure-keyvault-sample
+
+      az container create \
+      	--resource-group $rgName \
+      	--name $aciName \
+      	--image srempfer/spring-cloud-config-azure-keyvault-sample:latest \
+      	--cpu 1 \
+      	--memory 0.5 \
+      	--environment-variables SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_URI=$(keyvault-uri) SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_TENANT_ID=$(keyvault-tenant-id) \
+      	--ports 8888 \
+      	--dns-name-label $aciName-$RANDOM \
+      	--assign-identity [system] \
+        --query provisioningState
+
+      spID=$(az container show  --resource-group $rgName --name $aciName --query identity.principalId --out tsv)
+
+      az keyvault set-policy \
+        --name $(keyvault-name) \
+        --resource-group $rgName \
+        --object-id $spID \
+        --secret-permissions get list \
+        --query properties.provisioningState
+
+      FQDN=$(az container show --resource-group spring-cloud-config-azure-keyvault --name spring-cloud-config-azure-keyvault-sample --query ipAddress.fqdn -o tsv)
+
+      curl --silent --fail http://$FQDN:8888/test-application/default/master | jq -e '.propertySources[0].source.simplekey == "dummy"'
+
+      az container logs --resource-group $rgName --name $aciName
+
+      az keyvault delete-policy \
+        --name $(keyvault-name) \
+        --resource-group $rgName \
+        --object-id $spID \
+        --query properties.provisioningState
+
+      az container delete --resource-group $rgName --name $aciName --yes --query provisioningState
