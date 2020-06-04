@@ -34,7 +34,7 @@ steps:
 - task: Maven@3
   env:
     SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_URI: $(keyvault-uri)
-    SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
+    #SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
     #SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_KEY: $(keyvault-client-key)
     SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_TENANT_ID: $(keyvault-tenant-id)
     GPG_PASSPHRASE: $(gpg-passphrase)
