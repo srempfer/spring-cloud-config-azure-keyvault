@@ -88,7 +88,7 @@ steps:
       	--name $aciName \
       	--image srempfer/spring-cloud-config-azure-keyvault-sample:latest \
       	--cpu 1 \
-      	--memory 0.5 \
+      	--memory 0.7 \
       	--environment-variables SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_URI=$(keyvault-uri) SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_TENANT_ID=$(keyvault-tenant-id) \
       	--ports 8888 \
       	--dns-name-label $aciName-$RANDOM \
