@@ -72,6 +72,14 @@ public class KeyVaultProperties {
      */
     private Boolean allowTelemetry = Boolean.TRUE;
 
+    /**
+     * Flag if keys should be treated case sensitive.
+     *
+     * @see
+     * <a href="https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-starter-keyvault-secrets/README.md#case-sensitive-key-mode">Documentation of Azure Keyvault Secrets Spring Boot Starter</a>
+     */
+    private Boolean caseSensitive = Boolean.FALSE;
+
     public Boolean getEnabled () {
         return enabled;
     }
@@ -134,5 +142,13 @@ public class KeyVaultProperties {
 
     public void setAllowTelemetry ( Boolean allowTelemetry ) {
         this.allowTelemetry = allowTelemetry;
+    }
+
+    public Boolean getCaseSensitive () {
+        return caseSensitive;
+    }
+
+    public void setCaseSensitive ( Boolean caseSensitive ) {
+        this.caseSensitive = caseSensitive;
     }
 }

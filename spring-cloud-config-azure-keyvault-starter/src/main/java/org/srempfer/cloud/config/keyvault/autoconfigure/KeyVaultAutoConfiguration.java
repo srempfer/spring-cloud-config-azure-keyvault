@@ -66,6 +66,7 @@ public class KeyVaultAutoConfiguration {
     @ConditionalOnMissingBean
     @Bean
     public KeyVaultOperation keyVaultOperation ( KeyVaultProperties properties, SecretClient client ) {
-        return new KeyVaultOperation ( client, properties.getUri (), properties.getRefreshInterval (), Collections.emptyList (), false );
+        return new KeyVaultOperation ( client, properties.getUri (), properties.getRefreshInterval (), Collections.emptyList (),
+            properties.getCaseSensitive () );
     }
 }
