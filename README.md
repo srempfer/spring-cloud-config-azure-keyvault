@@ -32,7 +32,7 @@ spring.cloud.config.server.azure.keyvault.client-key=put-your-azure-client-key-h
 spring.cloud.config.server.azure.keyvault.tenant-id=put-your-azure-tenant-id-here
 ```
 
-For the interaction with Azure KeyVault the [Azure Key Vault Secrets Spring Boot Starter](https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-starters/azure-keyvault-secrets-spring-boot-starter) 
+For the interaction with Azure KeyVault the [Azure Key Vault Secrets Spring Boot Starter](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/spring/azure-spring-boot-starter-keyvault-secrets) 
 is used.
 
 ### Usage
