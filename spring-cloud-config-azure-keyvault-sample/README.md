@@ -4,7 +4,7 @@ This sample shows how to use [Spring Cloud Config Azure KeyVault Starter](../spr
 
 ## Setup Azure KeyVault
 
-* See the [Azure Key Vault Secrets Spring Boot Starter Sample](https://github.com/microsoft/azure-spring-boot/blob/master/azure-spring-boot-samples/azure-keyvault-secrets-spring-boot-sample/README.md#setup-azure-key-vault)
+* See the [Azure Key Vault Secrets Spring Boot Starter Sample](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/spring/azure-spring-boot-samples/azure-spring-boot-sample-keyvault-secrets#setup-azure-key-vault)
 how to setup a KeyVault.
 * Add a secret with name `test-key-to-decrypt` and `decrypted-value`
 * Add a secret with name `application---default---master---simplekey` and value `dummy`
