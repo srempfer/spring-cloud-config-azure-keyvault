@@ -72,7 +72,7 @@ public class KeyVaultEnvironmentEncryptor implements EnvironmentEncryptor {
 
     private String decrypt ( Object value ) {
         String keyVaultPropertyKey = value.toString ().substring ( "{keyvault}".length () );
-        return keyVaultOperation.get ( keyVaultPropertyKey );
+        return keyVaultOperation.getProperty ( keyVaultPropertyKey );
     }
 
 }

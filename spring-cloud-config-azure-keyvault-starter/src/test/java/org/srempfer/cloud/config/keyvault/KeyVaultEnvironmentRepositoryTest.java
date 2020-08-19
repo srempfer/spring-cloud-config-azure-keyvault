@@ -28,7 +28,7 @@ public class KeyVaultEnvironmentRepositoryTest {
         KeyVaultOperation keyVaultOperation = mock ( KeyVaultOperation.class );
         when ( keyVaultOperation.getPropertyNames () ).thenAnswer (
             invocation -> data.keySet ().toArray ( new String[ data.size () ] ) );
-        when ( keyVaultOperation.get ( anyString () ) ).thenAnswer (
+        when ( keyVaultOperation.getProperty ( anyString () ) ).thenAnswer (
             invocation -> data.get ( invocation.getArgument ( 0 ) ) );
         cut = new KeyVaultEnvironmentRepository ( keyVaultOperation, properties );
     }

@@ -79,7 +79,7 @@ public class KeyVaultEnvironmentRepository implements EnvironmentRepository, Ord
                     continue;
                 }
                 propertyKey = StringUtils.replace ( propertyKey, "--", "." );
-                String propertyValue = keyVaultOperation.get ( keyVaultKey );
+                String propertyValue = keyVaultOperation.getProperty ( keyVaultKey );
                 source.put ( propertyKey, propertyValue );
             }
         }
