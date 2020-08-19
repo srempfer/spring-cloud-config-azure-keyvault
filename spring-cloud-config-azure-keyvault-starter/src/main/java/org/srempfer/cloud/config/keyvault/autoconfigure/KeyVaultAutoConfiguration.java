@@ -6,15 +6,14 @@ import com.azure.identity.ManagedIdentityCredentialBuilder;
 import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
 import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 
@@ -36,7 +35,7 @@ public class KeyVaultAutoConfiguration {
         String clientId = properties.getClientId ();
         String clientKey = properties.getClientKey ();
 
-        if ( StringUtils.isNoneBlank ( clientId, clientKey ) ) {
+        if ( StringUtils.hasText ( clientId ) && StringUtils.hasText ( clientKey ) ) {
             LOGGER.debug ( "Client secret credentials will be used" );
             return new ClientSecretCredentialBuilder ()
                 .clientId ( clientId )
@@ -45,7 +44,7 @@ public class KeyVaultAutoConfiguration {
                 .build ();
         }
 
-        if ( StringUtils.isNoneBlank ( clientId ) ) {
+        if ( StringUtils.hasText ( clientId ) ) {
             LOGGER.debug ( "MSI credentials with specified clientId will be used" );
             return new ManagedIdentityCredentialBuilder ().clientId ( clientId ).build ();
         }
@@ -66,7 +65,6 @@ public class KeyVaultAutoConfiguration {
     @ConditionalOnMissingBean
     @Bean
     public KeyVaultOperation keyVaultOperation ( KeyVaultProperties properties, SecretClient client ) {
-        return new KeyVaultOperation ( client, properties.getUri (), properties.getRefreshInterval (), Collections.emptyList (),
-            properties.getCaseSensitive () );
+        return new KeyVaultOperation ( client, properties.getRefreshInterval (), Collections.emptyList (), properties.getCaseSensitive () );
     }
 }

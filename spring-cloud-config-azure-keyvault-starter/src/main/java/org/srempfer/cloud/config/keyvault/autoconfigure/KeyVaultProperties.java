@@ -1,6 +1,6 @@
 package org.srempfer.cloud.config.keyvault.autoconfigure;
 
-import com.microsoft.azure.keyvault.spring.Constants;
+import com.microsoft.azure.utils.Constants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
@@ -21,11 +21,6 @@ public class KeyVaultProperties {
      * Flag if Azure KeyVault access is enabled.
      */
     private Boolean enabled = Boolean.TRUE;
-
-    /**
-     * Timeout to acquire a access token in seconds.
-     */
-    private Long tokenAcquireTimeout = Constants.TOKEN_ACQUIRE_TIMEOUT_SECS;
 
     /**
      * URI of the Azure KeyVault (e.g. https://my.vault.azure.net/).
@@ -86,14 +81,6 @@ public class KeyVaultProperties {
 
     public void setEnabled ( Boolean enabled ) {
         this.enabled = enabled;
-    }
-
-    public Long getTokenAcquireTimeout () {
-        return tokenAcquireTimeout;
-    }
-
-    public void setTokenAcquireTimeout ( Long tokenAcquireTimeout ) {
-        this.tokenAcquireTimeout = tokenAcquireTimeout;
     }
 
     public String getUri () {

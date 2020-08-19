@@ -21,7 +21,7 @@ public class KeyVaultAutoConfigurationTest {
             .run ( ( context ) -> {
                 assertThat ( context ).hasSingleBean ( KeyVaultOperation.class );
                 KeyVaultOperation vaultOperation = context.getBean ( KeyVaultOperation.class );
-                assertThat ( vaultOperation.get ( "test-key-to-decrypt" ) ).isEqualTo ( "decrypted-value" );
+                assertThat ( vaultOperation.getProperty ( "test-key-to-decrypt" ) ).isEqualTo ( "decrypted-value" );
             } );
     }
 
