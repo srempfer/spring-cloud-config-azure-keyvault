@@ -11,7 +11,7 @@ import org.srempfer.cloud.config.keyvault.KeyVaultEnvironmentRepository;
  * @author Stefan Rempfer
  */
 @ConfigurationProperties ( "spring.cloud.config.server.azure.keyvault" )
-public class KeyVaultEnvironmentProperties implements EnvironmentRepositoryProperties {
+public class KeyVaultEnvironmentProperties extends KeyVaultProperties implements EnvironmentRepositoryProperties {
 
     private int order = Ordered.LOWEST_PRECEDENCE - 10;
 

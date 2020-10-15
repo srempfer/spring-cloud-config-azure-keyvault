@@ -29,9 +29,9 @@ import static org.assertj.core.api.Assertions.entry;
     classes = { ConfigServerCompositeIntegrationTest.ConfigServerApplicationConfiguration.class },
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = {
-        "spring.cloud.config.server.composite.[0].type=native",
-        "spring.cloud.config.server.composite.[0].searchLocations=classpath:/config-data/,classpath:/config-data/{application}/",
-        "spring.cloud.config.server.composite.[1].type=keyvault"
+        "spring.cloud.config.server.composite[0].type=native",
+        "spring.cloud.config.server.composite[0].search-locations=classpath:/config-data/,classpath:/config-data/{application}/",
+        "spring.cloud.config.server.composite[1].type=keyvault"
     } )
 public class ConfigServerCompositeIntegrationTest {
 

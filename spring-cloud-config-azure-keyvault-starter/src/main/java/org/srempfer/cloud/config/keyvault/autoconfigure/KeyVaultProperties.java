@@ -1,10 +1,6 @@
 package org.srempfer.cloud.config.keyvault.autoconfigure;
 
 import com.microsoft.azure.utils.Constants;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * Properties for Azure KeyVault access.
@@ -13,8 +9,6 @@ import javax.validation.constraints.NotBlank;
  * @see
  * <a href="https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/spring/azure-spring-boot-starter-keyvault-secrets/README.md#custom-settings">Documentation of Azure Keyvault Secrets Spring Boot Starter</a>
  */
-@Validated
-@ConfigurationProperties ( "spring.cloud.config.server.azure.keyvault" )
 public class KeyVaultProperties {
 
     /**
@@ -25,7 +19,6 @@ public class KeyVaultProperties {
     /**
      * URI of the Azure KeyVault (e.g. https://my.vault.azure.net/).
      */
-    @NotBlank
     private String uri;
 
     /**
@@ -51,7 +44,6 @@ public class KeyVaultProperties {
      * @see
      * <a href="https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/spring/azure-spring-boot-samples/azure-spring-boot-sample-keyvault-secrets#getting-started">Documentation of Azure Keyvault Secrets Spring Boot Sample</a>
      */
-    @NotBlank
     private String tenantId;
 
     /**

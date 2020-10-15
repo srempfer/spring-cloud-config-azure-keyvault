@@ -25,10 +25,21 @@ steps:
 
 - task: Maven@3
   env:
+    # used for keyvault profile
     SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_URI: $(keyvault-uri)
     SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_ID: $(keyvault-client-id)
     SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_KEY: $(keyvault-client-key)
     SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_TENANT_ID: $(keyvault-tenant-id)
+
+    # used for composite profile
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE: native
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH-LOCATIONS: classpath:/config-data/,classpath:/config-data/{application}/
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_TYPE: keyvault
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_URI: $(keyvault-uri)
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_CLIENT_ID: $(keyvault-client-id)
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_CLIENT_KEY: $(keyvault-client-key)
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_TENANT_ID: $(keyvault-tenant-id)
+
     GPG_PASSPHRASE: $(gpg-passphrase)
     OSSRH_USER_TOKEN: $(ossrh-user-token)
     OSSRH_PWD_TOKEN: $(ossrh-pwd-token)

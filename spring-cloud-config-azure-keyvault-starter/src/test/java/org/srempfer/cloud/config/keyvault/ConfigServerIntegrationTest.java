@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.entry;
 @SpringBootTest (
     classes = { ConfigServerIntegrationTest.ConfigServerApplicationConfiguration.class },
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    properties = { "spring.cloud.config.server.native.searchLocations=classpath:/config-data/,classpath:/config-data/{application}/" } )
+    properties = { "spring.cloud.config.server.native.search-locations=classpath:/config-data/,classpath:/config-data/{application}/" } )
 public class ConfigServerIntegrationTest {
 
     @LocalServerPort

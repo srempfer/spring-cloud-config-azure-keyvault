@@ -11,14 +11,16 @@ import org.srempfer.cloud.config.keyvault.autoconfigure.KeyVaultEnvironmentPrope
  */
 public class KeyVaultEnvironmentRepositoryFactory implements EnvironmentRepositoryFactory<KeyVaultEnvironmentRepository, KeyVaultEnvironmentProperties> {
 
-    private final KeyVaultOperation keyVaultOperation;
+    private final KeyVaultOperationFactory keyVaultOperationFactory;
 
-    public KeyVaultEnvironmentRepositoryFactory ( KeyVaultOperation keyVaultOperation ) {
-        this.keyVaultOperation = keyVaultOperation;
+    public KeyVaultEnvironmentRepositoryFactory ( KeyVaultOperationFactory keyVaultOperationFactory ) {
+        this.keyVaultOperationFactory = keyVaultOperationFactory;
     }
 
     @Override
     public KeyVaultEnvironmentRepository build ( KeyVaultEnvironmentProperties environmentProperties ) {
+        final KeyVaultOperation keyVaultOperation = keyVaultOperationFactory.build ( environmentProperties );
         return new KeyVaultEnvironmentRepository ( keyVaultOperation, environmentProperties );
     }
+
 }

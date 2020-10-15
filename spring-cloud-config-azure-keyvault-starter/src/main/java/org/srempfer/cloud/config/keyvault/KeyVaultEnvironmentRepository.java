@@ -21,12 +21,13 @@ import java.util.Map;
  *
  * @author Stefan Rempfer
  */
-public class KeyVaultEnvironmentRepository implements EnvironmentRepository, Ordered {
+public class KeyVaultEnvironmentRepository extends KeyVaultEnvironmentEncryptor implements EnvironmentRepository, Ordered {
 
     private final KeyVaultOperation keyVaultOperation;
     private int order;
 
     public KeyVaultEnvironmentRepository ( KeyVaultOperation keyVaultOperation, KeyVaultEnvironmentProperties properties ) {
+        super ( keyVaultOperation );
         this.keyVaultOperation = keyVaultOperation;
         this.order = properties.getOrder ();
     }
