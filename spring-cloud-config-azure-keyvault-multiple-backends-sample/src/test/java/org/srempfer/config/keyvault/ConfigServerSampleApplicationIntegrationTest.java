@@ -26,11 +26,6 @@ public class ConfigServerSampleApplicationIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-
-    @Test
-    public void verifyContextLoad () {
-    }
-
     @Test
     public void verifyPropertySources () throws Exception {
         mockMvc.perform ( get ( "/test-application/default/master" ) )

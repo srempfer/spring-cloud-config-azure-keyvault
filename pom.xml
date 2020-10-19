@@ -47,7 +47,7 @@
 
     <modules>
         <module>spring-cloud-config-azure-keyvault-starter</module>
-        <module>spring-cloud-config-azure-keyvault-sample</module>
+        <module>spring-cloud-config-azure-keyvault-multiple-backends-sample</module>
     </modules>
 
     <build>

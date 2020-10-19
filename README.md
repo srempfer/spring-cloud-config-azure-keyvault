@@ -7,7 +7,8 @@ The Starter brings you the ability to use the *encrypted values feature* in your
 In addition to that you could use your Azure KeyVault as backend to store your properties.
 
 ## Sample Code
-Please refer to [sample project here](./spring-cloud-config-azure-keyvault-sample)
+Please refer to the different sample projects
+ - [Multiple Backends via Profile](./spring-cloud-config-azure-keyvault-multiple-backends-sample)
 
 ## Quick Start
 
