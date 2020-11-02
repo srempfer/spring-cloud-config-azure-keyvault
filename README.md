@@ -10,6 +10,7 @@ In addition to that you could use your Azure KeyVault as backend to store your p
 Please refer to the different sample projects
  - [Multiple Backends via Profile](./spring-cloud-config-azure-keyvault-multiple-backends-sample)
  - [Single Backend via Profile](./spring-cloud-config-azure-keyvault-single-backend-sample)
+ - [Multiple Backends via Composite Profile](./spring-cloud-config-azure-keyvault-composite-sample)
 
 ## Quick Start
 
