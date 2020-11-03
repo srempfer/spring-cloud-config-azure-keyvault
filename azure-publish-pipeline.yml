@@ -11,6 +11,7 @@ pr: none
 
 variables:
   - group: keyvault4testing
+  - group: another-keyvault4testing
   - group: ossrh
 
 steps:
@@ -39,6 +40,13 @@ steps:
     SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_CLIENT_ID: $(keyvault-client-id)
     SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_CLIENT_KEY: $(keyvault-client-key)
     SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_TENANT_ID: $(keyvault-tenant-id)
+
+    # used for composite profile with multiple Key Vault backends
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_TYPE: keyvault
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_URI: $(another-keyvault-uri)
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_CLIENT_ID: $(another-keyvault-client-id)
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_CLIENT_KEY: $(another-keyvault-client-key)
+    SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_TENANT_ID: $(another-keyvault-tenant-id)
 
     GPG_PASSPHRASE: $(gpg-passphrase)
     OSSRH_USER_TOKEN: $(ossrh-user-token)

@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>io.github.srempfer</groupId>
-    <artifactId>spring-cloud-config-azure-keyvault-composite-sample</artifactId>
+    <artifactId>spring-cloud-config-azure-keyvault-multiple-keyvaults-sample</artifactId>
     <version>0.6.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -108,13 +108,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M4</version>
                 <configuration>
                     <includes>
                         <include>**/*IntegrationTest.java</include>
                         <include>**/*AutoConfigurationTest.java</include>
                     </includes>
-                    <excludedEnvironmentVariables>SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_TYPE,SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_URI,SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_CLIENT_ID,SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_CLIENT_KEY,SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_TENANT_ID</excludedEnvironmentVariables>
                 </configuration>
             </plugin>
             <plugin>
