@@ -1,8 +1,8 @@
 package org.srempfer.cloud.config.keyvault;
 
 import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
 import org.srempfer.cloud.config.keyvault.autoconfigure.KeyVaultEnvironmentProperties;
@@ -22,7 +22,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     private Map<String, String> data = new HashMap<> ();
     private KeyVaultEnvironmentRepository cut;
 
-    @Before
+    @BeforeEach
     public void init () {
         KeyVaultEnvironmentProperties properties = new KeyVaultEnvironmentProperties ();
         KeyVaultOperation keyVaultOperation = mock ( KeyVaultOperation.class );

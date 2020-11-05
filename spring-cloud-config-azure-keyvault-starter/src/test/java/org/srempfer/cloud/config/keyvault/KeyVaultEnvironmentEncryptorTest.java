@@ -1,8 +1,8 @@
 package org.srempfer.cloud.config.keyvault;
 
 import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
 
@@ -19,7 +19,7 @@ public class KeyVaultEnvironmentEncryptorTest {
     private KeyVaultEnvironmentEncryptor cut;
     private KeyVaultOperation keyVaultOperation;
 
-    @Before
+    @BeforeEach
     public void init () {
         keyVaultOperation = mock ( KeyVaultOperation.class );
         cut = new KeyVaultEnvironmentEncryptor ( keyVaultOperation );
