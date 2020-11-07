@@ -41,7 +41,7 @@ steps:
 - task: Maven@3
   displayName: Build Image
   inputs:
-    mavenPomFile: 'spring-cloud-config-azure-keyvault-sample/pom.xml'
+    mavenPomFile: 'spring-cloud-config-azure-keyvault-single-backend-sample/pom.xml'
     options: -Dspring-boot.build-image.imageName=srempfer/spring-cloud-config-azure-keyvault-sample:latest
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
