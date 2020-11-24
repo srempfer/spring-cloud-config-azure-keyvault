@@ -17,13 +17,13 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class KeyVaultEnvironmentRepositoryTest {
+class KeyVaultEnvironmentRepositoryTest {
 
     private Map<String, String> data = new HashMap<> ();
     private KeyVaultEnvironmentRepository cut;
 
     @BeforeEach
-    public void init () {
+    void init () {
         KeyVaultEnvironmentProperties properties = new KeyVaultEnvironmentProperties ();
         KeyVaultOperation keyVaultOperation = mock ( KeyVaultOperation.class );
         when ( keyVaultOperation.getPropertyNames () ).thenAnswer (
@@ -34,7 +34,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifyIgnoreKeysWithWrongFormat () {
+    void verifyIgnoreKeysWithWrongFormat () {
         data.put ( "some-key", "dummy" );
         data.put ( "application", "dummy" );
         data.put ( "application---default", "dummy" );
@@ -50,7 +50,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifySimpleKey () {
+    void verifySimpleKey () {
         data.put ( "application---default---master---simplekey", "dummy" );
 
         Environment environment = cut.findOne ( "application", "default", "master" );
@@ -69,7 +69,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifyDotContainingKey () {
+    void verifyDotContainingKey () {
         data.put ( "application---default---master---test--key", "dummy" );
 
         Environment environment = cut.findOne ( "application", "default", "master" );
@@ -88,7 +88,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifyDotAndDashContainingKey () {
+    void verifyDotAndDashContainingKey () {
         data.put ( "application---default---master---test--key-one", "dummy" );
 
         Environment environment = cut.findOne ( "application", "default", "master" );
@@ -107,7 +107,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifyWithEmptyProfileAndLabel () {
+    void verifyWithEmptyProfileAndLabel () {
         data.put ( "application---default---master---simplekey", "dummy" );
 
         Environment environment = cut.findOne ( "application", "", "" );
@@ -126,7 +126,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifyWithDifferentAppAndNoDefault () {
+    void verifyWithDifferentAppAndNoDefault () {
         data.put ( "other-app---default---master---simplekey", "dummy" );
 
         Environment environment = cut.findOne ( "test-app", "default", "master" );
@@ -138,7 +138,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifyWithDifferentProfileAndNoDefault () {
+    void verifyWithDifferentProfileAndNoDefault () {
         data.put ( "test-app---other-profile---master---simplekey", "dummy" );
 
         Environment environment = cut.findOne ( "test-app", "default", "master" );
@@ -150,7 +150,7 @@ public class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
-    public void verifyPropertySourceOrder () {
+    void verifyPropertySourceOrder () {
         data.put ( "application---default---master---simplekey", "default-app-default-value" );
         data.put ( "application---test-profile---master---simplekey", "default-app-profile-value" );
         data.put ( "test-app---default---master---simplekey", "test-app-default-value" );

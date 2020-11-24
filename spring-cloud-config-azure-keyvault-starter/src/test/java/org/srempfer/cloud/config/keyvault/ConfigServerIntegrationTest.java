@@ -26,13 +26,13 @@ import static org.assertj.core.api.Assertions.entry;
     classes = { ConfigServerIntegrationTest.ConfigServerApplicationConfiguration.class },
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = { "spring.cloud.config.server.native.search-locations=classpath:/config-data/,classpath:/config-data/{application}/" } )
-public class ConfigServerIntegrationTest {
+class ConfigServerIntegrationTest {
 
     @LocalServerPort
     private Integer serverPort;
 
     @Test
-    public void verifyKeyVaultEnvironmentEncryptorAndRepository () {
+    void verifyKeyVaultEnvironmentEncryptorAndRepository () {
 
         String url = "http://localhost:" + serverPort + "/test-app/default";
 
@@ -66,7 +66,7 @@ public class ConfigServerIntegrationTest {
     @Configuration
     @EnableAutoConfiguration
     @EnableConfigServer
-    public static class ConfigServerApplicationConfiguration {
+    static class ConfigServerApplicationConfiguration {
 
     }
 }

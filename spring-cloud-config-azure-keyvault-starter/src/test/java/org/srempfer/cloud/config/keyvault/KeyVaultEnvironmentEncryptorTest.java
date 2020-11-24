@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.entry;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class KeyVaultEnvironmentEncryptorTest {
+class KeyVaultEnvironmentEncryptorTest {
 
     private KeyVaultEnvironmentEncryptor cut;
     private KeyVaultOperation keyVaultOperation;
@@ -26,7 +26,7 @@ public class KeyVaultEnvironmentEncryptorTest {
     }
 
     @Test
-    public void verifyDecrypt () {
+    void verifyDecrypt () {
         when ( keyVaultOperation.getPropertyNames () ).thenReturn ( new String[]{ "test-key-to-decrypt" } );
         when ( keyVaultOperation.getProperty ( "test-key-to-decrypt" ) ).thenReturn ( "decrypted-value" );
         when ( keyVaultOperation.getProperty ( "test-key-to-decrypt-missing" ) ).thenReturn ( null );

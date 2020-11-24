@@ -30,13 +30,13 @@ import static org.assertj.core.api.Assertions.entry;
         "spring.cloud.config.server.composite[0].search-locations=classpath:/config-data/,classpath:/config-data/{application}/",
         "spring.cloud.config.server.composite[1].type=keyvault"
     } )
-public class ConfigServerCompositeIntegrationTest {
+class ConfigServerCompositeIntegrationTest {
 
     @LocalServerPort
     private Integer serverPort;
 
     @Test
-    public void verifyKeyVaultEnvironmentEncryptorAndRepository () {
+    void verifyKeyVaultEnvironmentEncryptorAndRepository () {
 
         String url = "http://localhost:" + serverPort + "/test-app/default";
 
@@ -70,7 +70,7 @@ public class ConfigServerCompositeIntegrationTest {
     @Configuration
     @EnableAutoConfiguration
     @EnableConfigServer
-    public static class ConfigServerApplicationConfiguration {
+    static class ConfigServerApplicationConfiguration {
 
     }
 }

@@ -18,13 +18,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest ( classes = ConfigServerSampleApplication.class )
 @AutoConfigureMockMvc
-public class ConfigServerSampleApplicationIntegrationTest {
+class ConfigServerSampleApplicationIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void verifyPropertySources () throws Exception {
+    void verifyPropertySources () throws Exception {
         mockMvc.perform ( get ( "/test-application/default/master" ) )
             .andExpect ( status ().isOk () )
             .andExpect ( content ().contentType ( MediaType.APPLICATION_JSON ) )
