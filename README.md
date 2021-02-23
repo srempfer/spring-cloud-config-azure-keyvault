@@ -10,6 +10,7 @@ In addition to that you could use your Azure KeyVault as backend to store your p
 Please refer to the different sample projects
  - [Multiple Backends via Profile](./spring-cloud-config-azure-keyvault-multiple-backends-sample)
  - [Single Backend via Profile](./spring-cloud-config-azure-keyvault-single-backend-sample)
+ - [Single Backend via Profile in combination with Spring Boot Actuator](./spring-cloud-config-azure-keyvault-actuator-sample)
  - [Multiple Backends via Composite Profile](./spring-cloud-config-azure-keyvault-composite-sample)
  - [Multiple KeyVaults via Composite Profile](./spring-cloud-config-azure-keyvault-multiple-keyvaults-sample)
 
@@ -23,7 +24,7 @@ The starter is published on Maven Central. If you're using Maven add the followi
 <dependency>
     <groupId>io.github.srempfer</groupId>
     <artifactId>spring-cloud-config-azure-keyvault-starter</artifactId>
-    <version>0.6.0-SNAPSHOT</version>
+    <version>0.8.0-SNAPSHOT</version>
 </dependency>
 ```
 
