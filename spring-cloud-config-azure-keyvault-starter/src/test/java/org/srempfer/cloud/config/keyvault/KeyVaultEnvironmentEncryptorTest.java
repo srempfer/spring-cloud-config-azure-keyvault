@@ -1,6 +1,6 @@
 package org.srempfer.cloud.config.keyvault;
 
-import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
+import com.azure.spring.keyvault.KeyVaultOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.cloud.config.environment.Environment;

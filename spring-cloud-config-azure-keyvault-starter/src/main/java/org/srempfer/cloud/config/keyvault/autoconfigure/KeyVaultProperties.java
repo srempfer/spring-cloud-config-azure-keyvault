@@ -1,6 +1,6 @@
 package org.srempfer.cloud.config.keyvault.autoconfigure;
 
-import com.microsoft.azure.utils.Constants;
+import com.azure.spring.utils.Constants;
 
 /**
  * Properties for Azure KeyVault access.
