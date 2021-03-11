@@ -1,6 +1,6 @@
 package org.srempfer.cloud.config.keyvault.autoconfigure;
 
-import com.microsoft.azure.keyvault.spring.KeyVaultOperation;
+import com.azure.spring.keyvault.KeyVaultOperation;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

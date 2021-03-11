@@ -40,7 +40,7 @@ Open `http://localhost:8888/test-application/default/master` in your favorite br
       }
     },
     {
-      "name": "classpath:/config-data/application.properties",
+      "name": "class path resource [config-data/application.properties",
       "source": {
         "client.test.key": "test-value",
         "client.test.encrypted": "decrypted-value"
