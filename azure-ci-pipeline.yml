@@ -11,6 +11,16 @@ trigger:
     include:
       - master
 
+strategy:
+  matrix:
+    jdk8:
+      jdk_version: "1.8"
+    jdk11:
+      jdk_version: "1.11"
+    jdk16:
+      jdk_version: "1.16"
+  maxParallel: 2
+
 variables:
 - group: keyvault4testing
 - group: another-keyvault4testing
@@ -62,7 +72,7 @@ steps:
     options: '-s settings-ci.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
+    jdkVersionOption: $(jdk_version)
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: |
