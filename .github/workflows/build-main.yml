@@ -1,0 +1,68 @@
+name: CI Build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: 'adopt'
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Value of the GPG private key to import
+          gpg-passphrase: GPG_PASSPHRASE # env variable for GPG private key passphrase
+          overwrite-settings: false
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          # used for keyvault profile
+          SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_URI: ${{ secrets.KEYVAULT_URI }}
+          SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_ID: ${{ secrets.KEYVAULT_CLIENT_ID }}
+          SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_CLIENT_KEY: ${{ secrets.KEYVAULT_CLIENT_KEY }}
+          SPRING_CLOUD_CONFIG_SERVER_AZURE_KEYVAULT_TENANT_ID: ${{ secrets.KEYVAULT_TENANT_ID }}
+          # used for composite profile
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE: native
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH-LOCATIONS: classpath:/config-data/,classpath:/config-data/{application}/
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_TYPE: keyvault
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_URI: ${{ secrets.KEYVAULT_URI }}
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_CLIENT_ID: ${{ secrets.KEYVAULT_CLIENT_ID }}
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_CLIENT_KEY: ${{ secrets.KEYVAULT_CLIENT_KEY }}
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_1_TENANT_ID: ${{ secrets.KEYVAULT_TENANT_ID }}
+          # used for composite profile with multiple Key Vault backends
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_TYPE: keyvault
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_URI: ${{ secrets.ANOTHER_KEYVAULT_URI }}
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_CLIENT_ID: ${{ secrets.ANOTHER_KEYVAULT_CLIENT_ID }}
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_CLIENT_KEY: ${{ secrets.ANOTHER_KEYVAULT_CLIENT_KEY }}
+          SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_2_TENANT_ID: ${{ secrets.ANOTHER_KEYVAULT_TENANT_ID }}
+        run: mvn -s settings-ci.xml --batch-mode --update-snapshots clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+
+
+
+        # https://github.com/SonarSource/sonar-scanner-vsts/blob/master/common/ts/prepare-task.ts
+        # https://github.com/microsoft/azure-pipelines-tasks/blob/77f58d28de4cf558090fe38bdc03734290aa81bc/Tasks/MavenV3/maventask.ts
+
+        # https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
