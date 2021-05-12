@@ -181,6 +181,9 @@
                 </executions>
                 <configuration>
                     <keyname>252DBC1E</keyname>
+                    <gpgArguments>
+                        <argument>--no-tty</argument>
+                    </gpgArguments>
                 </configuration>
             </plugin>
         </plugins>
