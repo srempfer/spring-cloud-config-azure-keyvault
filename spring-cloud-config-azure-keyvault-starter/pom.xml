@@ -59,6 +59,10 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <azure.spring-boot.version>3.4.0</azure.spring-boot.version>
+
+        <sonar.projectKey>io.github.srempfer:spring-cloud-config-azure-keyvault</sonar.projectKey>
+        <sonar.organization>srempfer</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
