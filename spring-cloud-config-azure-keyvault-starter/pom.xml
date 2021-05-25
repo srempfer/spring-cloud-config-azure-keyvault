@@ -13,7 +13,7 @@
 
     <groupId>io.github.srempfer</groupId>
     <artifactId>spring-cloud-config-azure-keyvault-starter</artifactId>
-    <version>0.8.0</version>
+    <version>0.9.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Spring Cloud Config Azure KeyVault Starter</name>
