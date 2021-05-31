@@ -32,7 +32,7 @@ class ConfigServerSampleApplicationIntegrationTest {
             .andExpect ( jsonPath ( "$.propertySources", hasSize ( 2 ) ) )
             .andExpect ( jsonPath ( "$.propertySources[0].name", is ( "keyvault-application-default" ) ) )
             .andExpect ( jsonPath ( "$.propertySources[0].source", hasEntry ( "simplekey", "dummy" ) ) )
-            .andExpect ( jsonPath ( "$.propertySources[1].name", is ( "class path resource [config-data/application.properties" ) ) )
+            .andExpect ( jsonPath ( "$.propertySources[1].name", is ( "class path resource [config-data/application.properties]" ) ) )
             .andExpect ( jsonPath ( "$.propertySources[1].source", allOf (
                 hasEntry ( "client.test.key", "test-value" ),
                 hasEntry ( "client.test.encrypted", "decrypted-value" ) )
