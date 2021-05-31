@@ -55,7 +55,7 @@ class ConfigServerIntegrationTest {
         assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
 
         propertySource = propertySources.get ( 1 );
-        assertThat ( propertySource.getName () ).isEqualTo ( "class path resource [config-data/application.properties" );
+        assertThat ( propertySource.getName () ).isEqualTo ( "class path resource [config-data/application.properties]" );
         source = (Map<Object, Object>) propertySource.getSource ();
         assertThat ( source ).containsOnly (
             entry ( "client.test.key", "test-value" ),

@@ -54,7 +54,7 @@ class ConfigServerCompositeIntegrationTest {
         assertThat ( propertySources ).hasSize ( 2 );
 
         PropertySource propertySource = propertySources.get ( 0 );
-        assertThat ( propertySource.getName () ).isEqualTo ( "class path resource [config-data/application.properties" );
+        assertThat ( propertySource.getName () ).isEqualTo ( "class path resource [config-data/application.properties]" );
         Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
         assertThat ( source ).containsOnly (
             entry ( "client.test.key", "test-value" ),
