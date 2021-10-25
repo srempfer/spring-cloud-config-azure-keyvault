@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'ubuntu-latest'
 
 trigger: none
 pr: none
@@ -22,7 +22,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'gpg --import $(signingPrivatekey.secureFilePath)'
+    script: 'gpg --batch --import $(signingPrivatekey.secureFilePath)'
 
 - task: Maven@3
   env:
