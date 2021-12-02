@@ -44,7 +44,7 @@ Open `http://localhost:8888/test-application/default/master` in your favorite br
   "state": null,
   "propertySources": [
     {
-      "name": "class path resource [config-data/application.properties]",
+      "name": "classpath:/config-data/application.properties",
       "source": {
         "client.test.key": "test-value",
         "client.test.encrypted.one": "decrypted-value-of-keyvault-one"

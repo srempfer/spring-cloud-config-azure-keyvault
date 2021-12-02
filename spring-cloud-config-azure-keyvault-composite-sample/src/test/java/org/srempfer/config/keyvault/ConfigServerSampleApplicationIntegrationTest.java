@@ -30,7 +30,7 @@ class ConfigServerSampleApplicationIntegrationTest {
             .andExpect ( content ().contentType ( MediaType.APPLICATION_JSON ) )
             .andExpect ( jsonPath ( "$.propertySources" ).isArray () )
             .andExpect ( jsonPath ( "$.propertySources", hasSize ( 2 ) ) )
-            .andExpect ( jsonPath ( "$.propertySources[0].name", is ( "class path resource [config-data/application.properties]" ) ) )
+            .andExpect ( jsonPath ( "$.propertySources[0].name", is ( "classpath:/config-data/application.properties" ) ) )
             .andExpect ( jsonPath ( "$.propertySources[0].source", allOf (
                 hasEntry ( "client.test.key", "test-value" ),
                 hasEntry ( "client.test.encrypted", "decrypted-value" ) )
