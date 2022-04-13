@@ -1,6 +1,6 @@
 package org.srempfer.cloud.config.keyvault;
 
-import com.azure.spring.keyvault.KeyVaultOperation;
+import com.azure.spring.cloud.autoconfigure.keyvault.environment.KeyVaultOperation;
 import org.springframework.cloud.config.server.environment.EnvironmentRepositoryFactory;
 import org.srempfer.cloud.config.keyvault.autoconfigure.KeyVaultEnvironmentProperties;
 

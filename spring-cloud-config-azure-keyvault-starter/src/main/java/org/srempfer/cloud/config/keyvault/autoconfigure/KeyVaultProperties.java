@@ -1,6 +1,8 @@
 package org.srempfer.cloud.config.keyvault.autoconfigure;
 
-import com.azure.spring.utils.Constants;
+import com.azure.spring.cloud.autoconfigure.implementation.keyvault.secrets.properties.AzureKeyVaultPropertySourceProperties;
+
+import java.time.Duration;
 
 /**
  * Properties for Azure KeyVault access.
@@ -47,9 +49,9 @@ public class KeyVaultProperties {
     private String tenantId;
 
     /**
-     * Interval in milli seconds how long the retrieved secrets are cached before lookup in Azure KeyVault again.
+     * Interval how long the retrieved secrets are cached before lookup in Azure KeyVault again.
      */
-    private Long refreshInterval = Constants.DEFAULT_REFRESH_INTERVAL_MS;
+    private Duration refreshInterval = AzureKeyVaultPropertySourceProperties.DEFAULT_REFRESH_INTERVAL;
 
     /**
      * Flag if telemetry of usage is sent to Microsoft.
@@ -107,11 +109,11 @@ public class KeyVaultProperties {
         this.tenantId = tenantId;
     }
 
-    public Long getRefreshInterval () {
+    public Duration getRefreshInterval () {
         return refreshInterval;
     }
 
-    public void setRefreshInterval ( Long refreshInterval ) {
+    public void setRefreshInterval ( Duration refreshInterval ) {
         this.refreshInterval = refreshInterval;
     }
 
