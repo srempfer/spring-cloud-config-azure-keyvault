@@ -58,13 +58,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>2021.0.2</spring-cloud.version>
-        <azure.spring-boot.version>3.14.0</azure.spring-boot.version>
+        <azure.spring-boot.version>4.1.0</azure.spring-boot.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.azure.spring</groupId>
-            <artifactId>azure-spring-boot-starter-keyvault-secrets</artifactId>
+            <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -89,7 +89,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.azure.spring</groupId>
-                <artifactId>azure-spring-boot-bom</artifactId>
+                <artifactId>spring-cloud-azure-dependencies</artifactId>
                 <version>${azure.spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
