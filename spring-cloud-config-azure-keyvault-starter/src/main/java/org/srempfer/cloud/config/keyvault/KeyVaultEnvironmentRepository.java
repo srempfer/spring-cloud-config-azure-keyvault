@@ -35,10 +35,10 @@ public class KeyVaultEnvironmentRepository extends KeyVaultEnvironmentEncryptor 
     @Override
     public Environment findOne ( String application, String profile, String label ) {
         String config = application;
-        if ( StringUtils.isEmpty ( label ) ) {
+        if ( !StringUtils.hasLength ( label ) ) {
             label = "master";
         }
-        if ( StringUtils.isEmpty ( profile ) ) {
+        if ( !StringUtils.hasLength ( profile ) ) {
             profile = "default";
         }
         if ( !profile.startsWith ( "default" ) ) {
@@ -88,7 +88,9 @@ public class KeyVaultEnvironmentRepository extends KeyVaultEnvironmentEncryptor 
     }
 
     private String buildPrefix ( String application, String profile, String label ) {
-        return application + "---" + profile + "---" + label + "---";
+        String sanitizedApplication = StringUtils.replace ( application, "/", "----" );
+        String sanitizedLabel = StringUtils.replace ( label, "/", "----" );
+        return sanitizedApplication + "---" + profile + "---" + sanitizedLabel + "---";
     }
 
     @Override
