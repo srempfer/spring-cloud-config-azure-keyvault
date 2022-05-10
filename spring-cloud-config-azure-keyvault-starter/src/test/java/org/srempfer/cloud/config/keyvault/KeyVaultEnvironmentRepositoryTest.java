@@ -126,6 +126,82 @@ class KeyVaultEnvironmentRepositoryTest {
     }
 
     @Test
+    void verifyWithLabelContainingDash () {
+        data.put ( "application---default---label-one---simplekey", "dummy" );
+
+        Environment environment = cut.findOne ( "application", "", "label-one" );
+        assertThat ( environment ).isNotNull ();
+        assertThat ( environment.getName () ).isEqualTo ( "application" );
+        assertThat ( environment.getProfiles () ).containsExactly ( "default" );
+        assertThat ( environment.getLabel () ).isEqualTo ( "label-one" );
+
+        List<PropertySource> propertySources = environment.getPropertySources ();
+        assertThat ( propertySources ).hasSize ( 1 );
+
+        PropertySource propertySource = propertySources.get ( 0 );
+        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-application-default" );
+        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
+        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
+    }
+
+    @Test
+    void verifyWithLabelContainingSlash () {
+        data.put ( "application---default---v1----prod---simplekey", "dummy" );
+
+        Environment environment = cut.findOne ( "application", "", "v1/prod" );
+        assertThat ( environment ).isNotNull ();
+        assertThat ( environment.getName () ).isEqualTo ( "application" );
+        assertThat ( environment.getProfiles () ).containsExactly ( "default" );
+        assertThat ( environment.getLabel () ).isEqualTo ( "v1/prod" );
+
+        List<PropertySource> propertySources = environment.getPropertySources ();
+        assertThat ( propertySources ).hasSize ( 1 );
+
+        PropertySource propertySource = propertySources.get ( 0 );
+        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-application-default" );
+        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
+        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
+    }
+
+    @Test
+    void verifyWithApplicationContainingDash () {
+        data.put ( "my-application---default---master---simplekey", "dummy" );
+
+        Environment environment = cut.findOne ( "my-application", "", "" );
+        assertThat ( environment ).isNotNull ();
+        assertThat ( environment.getName () ).isEqualTo ( "my-application" );
+        assertThat ( environment.getProfiles () ).containsExactly ( "default" );
+        assertThat ( environment.getLabel () ).isEqualTo ( "master" );
+
+        List<PropertySource> propertySources = environment.getPropertySources ();
+        assertThat ( propertySources ).hasSize ( 1 );
+
+        PropertySource propertySource = propertySources.get ( 0 );
+        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-my-application-default" );
+        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
+        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
+    }
+
+    @Test
+    void verifyWithApplicationContainingSlash () {
+        data.put ( "Org1----MyApplication---default---master---simplekey", "dummy" );
+
+        Environment environment = cut.findOne ( "Org1/MyApplication", "", "" );
+        assertThat ( environment ).isNotNull ();
+        assertThat ( environment.getName () ).isEqualTo ( "Org1/MyApplication" );
+        assertThat ( environment.getProfiles () ).containsExactly ( "default" );
+        assertThat ( environment.getLabel () ).isEqualTo ( "master" );
+
+        List<PropertySource> propertySources = environment.getPropertySources ();
+        assertThat ( propertySources ).hasSize ( 1 );
+
+        PropertySource propertySource = propertySources.get ( 0 );
+        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-Org1/MyApplication-default" );
+        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
+        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
+    }
+
+    @Test
     void verifyWithDifferentAppAndNoDefault () {
         data.put ( "other-app---default---master---simplekey", "dummy" );
 

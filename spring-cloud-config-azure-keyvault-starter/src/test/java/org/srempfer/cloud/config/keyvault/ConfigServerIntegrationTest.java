@@ -63,6 +63,52 @@ class ConfigServerIntegrationTest {
             entry ( "missing.client.test.encrypted-missing", "<n/a>" ) );
     }
 
+    @Test
+    void verifyKeyVaultRepositoryWithLabelContainingDash () {
+        String url = "http://localhost:" + serverPort + "/test-app/default/v1(_)prod";
+
+        RestTemplate restTemplate = new RestTemplate ();
+        ResponseEntity<Environment> response = restTemplate.exchange ( url, HttpMethod.GET, HttpEntity.EMPTY, Environment.class );
+        assertThat ( response.getStatusCode () ).isEqualTo ( HttpStatus.OK );
+
+        Environment environment = response.getBody ();
+        assertThat ( environment ).isNotNull ();
+        assertThat ( environment.getName () ).isEqualTo ( "test-app" );
+        assertThat ( environment.getLabel () ).isEqualTo ( "v1/prod" );
+        assertThat ( environment.getProfiles () ).contains ( "default" );
+
+        List<PropertySource> propertySources = environment.getPropertySources ();
+        assertThat ( propertySources ).hasSize ( 2 );
+
+        PropertySource propertySource = propertySources.get ( 0 );
+        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-application-default" );
+        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
+        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
+    }
+
+    @Test
+    void verifyKeyVaultRepositoryWithApplicationContainingDash () {
+        String url = "http://localhost:" + serverPort + "/Org1(_)MyApp/default";
+
+        RestTemplate restTemplate = new RestTemplate ();
+        ResponseEntity<Environment> response = restTemplate.exchange ( url, HttpMethod.GET, HttpEntity.EMPTY, Environment.class );
+        assertThat ( response.getStatusCode () ).isEqualTo ( HttpStatus.OK );
+
+        Environment environment = response.getBody ();
+        assertThat ( environment ).isNotNull ();
+        assertThat ( environment.getName () ).isEqualTo ( "Org1/MyApp" );
+        assertThat ( environment.getLabel () ).isBlank ();
+        assertThat ( environment.getProfiles () ).contains ( "default" );
+
+        List<PropertySource> propertySources = environment.getPropertySources ();
+        assertThat ( propertySources ).hasSize ( 2 );
+
+        PropertySource propertySource = propertySources.get ( 0 );
+        assertThat ( propertySource.getName () ).isEqualTo ( "keyvault-application-default" );
+        Map<Object, Object> source = (Map<Object, Object>) propertySource.getSource ();
+        assertThat ( source ).contains ( entry ( "simplekey", "dummy" ) );
+    }
+
     @Configuration
     @EnableAutoConfiguration
     @EnableConfigServer
