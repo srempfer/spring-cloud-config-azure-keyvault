@@ -24,7 +24,7 @@ The starter is published on Maven Central. If you're using Maven add the followi
 <dependency>
     <groupId>io.github.srempfer</groupId>
     <artifactId>spring-cloud-config-azure-keyvault-starter</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.9.0</version>
 </dependency>
 ```
 
