@@ -58,7 +58,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>2021.0.2</spring-cloud.version>
-        <azure.spring-boot.version>4.1.0</azure.spring-boot.version>
+        <azure.spring-boot.version>4.2.0</azure.spring-boot.version>
     </properties>
 
     <dependencies>
