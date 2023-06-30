@@ -45,6 +45,10 @@
         </repository>
     </distributionManagement>
 
+    <properties>
+        <sonar.organization>srempfer</sonar.organization>
+    </properties>
+
     <modules>
         <module>spring-cloud-config-azure-keyvault-starter</module>
         <module>spring-cloud-config-azure-keyvault-multiple-backends-sample</module>
